@@ -1,0 +1,67 @@
+#VRML_SIM R2022a utf8
+WorldInfo {
+}
+Viewpoint {
+  orientation 0.002727687015521552 0.9999865062308956 -0.004421207942656298 1.1045612003026795
+  position -2.0562491139152503 -0.16918952416625865 3.131615767666782
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  floorSize 2.5 2.5
+}
+Solid {
+  translation 1.23236 0.00584746 0.009
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 1 0 0
+        roughness 1
+        metalness 0
+      }
+      geometry Cone {
+        bottomRadius 0.05
+        height 0.1
+      }
+    }
+  ]
+}
+DEF epuck E-puck {
+  hidden linearVelocity_0 4.13677966681958e-09 1.3925263693598441e-15 -2.7000623958883807e-15
+  hidden angularVelocity_0 -1.6790877319968985e-13 -1.3762588485239455e-07 1.3374798287094453e-13
+  hidden rotation_1 0 1 0 2.9802322387695313e-08
+  hidden rotation_2 0 1 0 2.9802322387695313e-08
+  translation -1.132879999900785 0.003318010017515571 -6.396199578886062e-05
+  rotation 0.742816349034231 -0.669495236227359 1.66231251531433e-05 3.2890747226041826e-09
+  name "epuck"
+  controller "bug0_controller"
+  supervisor TRUE
+}
+Wall {
+  translation -0.09 0 0
+  size 0.05 1 0.2
+}
+Wall {
+  translation -0.585774 -0.333713 1.55431e-15
+  name "wall(4)"
+  size 0.05 1 0.2
+}
+Wall {
+  translation 0.86 -0.19 0
+  name "wall(2)"
+  size 0.05 1.3 0.2
+}
+Wall {
+  translation 0.390382 0.479616 0
+  rotation 0 0 1 1.57
+  name "wall(1)"
+  size 0.05 1 0.2
+}
+Wall {
+  translation 0.13931 -0.860184 0
+  rotation 0 0 1 1.57
+  name "wall(3)"
+  size 0.05 1.5 0.2
+}
