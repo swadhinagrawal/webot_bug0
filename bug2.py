@@ -34,7 +34,6 @@ def angleWrap(ang):
     return ang
 
 def rotation_controller(desired_angle):
-    # print('here',desired_angle)
     global leftMotor, rightMotor, heading_angle, robot, super
     reached = 0
     accuracy = 0.5
@@ -49,9 +48,7 @@ def rotation_controller(desired_angle):
         rotation_dir = rotation_dir/abs(rotation_dir)
         
         theta = np.arccos(np.dot(desired_vec,heading_vec))
-        # print('printing theta',theta)
         if theta*180/np.pi > accuracy:
-            # print('here') 
             leftSpeed = rotation_dir * abs(heading_angle - desired_angle)
             rightSpeed = -rotation_dir * abs(heading_angle - desired_angle)#* MAX_SPEED/abs(heading_angle - desired_angle)
         else:
@@ -61,7 +58,6 @@ def rotation_controller(desired_angle):
         leftMotor.setVelocity(leftSpeed)
         rightMotor.setVelocity(rightSpeed)
         if abs(heading_angle - desired_angle)*180/np.pi <= accuracy:
-            # print('printing rotation error',[heading_angle, desired_angle])
             reached = 1
             break
     return reached
@@ -78,8 +74,7 @@ def translation_controller(goal):
         current_location = robot.getField('translation')
         current_location = current_location.getSFVec3f()
         desired_dir = goal - np.array(current_location)[:2]
-        # print(desired_dir)
-        # Desired direction needs some correction, need to debug
+
         desired_dir_norm = np.linalg.norm(desired_dir)
         epuck_orientation = robot.getOrientation()
         heading_angle = np.arctan2(epuck_orientation[0],epuck_orientation[3])
@@ -89,11 +84,9 @@ def translation_controller(goal):
             desired_dir = desired_dir/desired_dir_norm
         desired_ang = np.arctan2(desired_dir[0], desired_dir[1])
         
-        # rotation_controller(np.pi/2)
         if front_obstacle:
             leftMotor.setVelocity(0)
             rightMotor.setVelocity(0)
-            # ## After correcting desired direction, here need to make change how much to rotate
             desired_angle = 0.0
             # print('front_obs')
             right_obs = (ps[2].getValue() > accuracy)
@@ -121,21 +114,17 @@ def translation_controller(goal):
             rightSpeed = 0.3 * MAX_SPEED
         
         else:
-            # ## theta = np.arccos(np.dot(desired_dir,heading_vec))
             # print('no obstacle')
-
+            # Make changes here for bug 2
             reached = 0
             if not reached:
-                # ## reached = rotation_controller(theta)
                 reached = rotation_controller(desired_ang)
-                # print('breaking', reached)
             if reached:
                 # print('heading towards the goal')
                 leftSpeed = 0.5 * MAX_SPEED
                 rightSpeed = 0.5 * MAX_SPEED
                 
         if desired_dir_norm <=0.1:
-            # print('bad breaking')
             break
 
         leftMotor.setVelocity(leftSpeed)
@@ -149,7 +138,6 @@ ps = []
 for i in range(8):
     ps.append(super.getDevice('ps'+str(i)))
     ps[i].enable(TIME_STEP)
-# while super.step(TIME_STEP) != -1:
 epuck_orientation = robot.getOrientation()
 heading_angle = np.arctan2(epuck_orientation[0], epuck_orientation[3])
 current_location = robot.getField('translation')
