@@ -32,7 +32,7 @@ DEF epuck E-puck {
   translation -1.132879999900785 0.003318010017515571 -6.396199578886062e-05
   rotation 0.742816349034231 -0.669495236227359 1.66231251531433e-05 3.2890747226041826e-09
   name "epuck"
-  controller "bug0_controller"
+  controller "bug2"
   supervisor TRUE
 }
 Wall {
